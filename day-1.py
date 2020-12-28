@@ -16,19 +16,19 @@ for m in nums:
     for n in nums:
         if n == m:
             continue
-        sum = n + m
-        if sum == 2020:
+        total = n + m
+        if total == 2020:
             print("  Matches found.  {} and {}".format(m, n))
             print("  Solution: {}".format(m * n))
             found = True
             break
-        if sum > 2020:
+        if total > 2020:
             continue
     if found:
         break
 
 found = False
-print("Find 3 numbers that sum 2020")
+print("Find 3 numbers that total 2020")
 
 # this hurts...x^3?
 for m in nums:
@@ -36,13 +36,13 @@ for m in nums:
         for o in nums:
             if len(set([m, n, o])) < 3:
                 continue
-            sum = n + m + o
-            if sum == 2020:
+            total = n + m + o
+            if total == 2020:
                 print("  Matches found.  {} and {} and {}".format(m, n, o))
                 print("  Solution: {}".format(m * n * o))
                 found = True
                 break
-            if sum > 2020:
+            if total > 2020:
                 continue
         if found:
             break
