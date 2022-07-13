@@ -59,10 +59,7 @@ def infix_to_prefix(line):
                 output.insert(0, top)
                 top = operators.pop()
         else:
-            while (
-                len(operators) > 0
-                and precedence[operators[-1]] >= precedence[token]
-            ):
+            while len(operators) > 0 and precedence[operators[-1]] >= precedence[token]:
                 output.insert(0, operators.pop())
             operators.append(token)
 

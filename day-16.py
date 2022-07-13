@@ -38,9 +38,9 @@ def parse_tickets():
 
             if parsed:
                 if "field" in parsed:
-                    ticket_dict[parsed.get("field")] = parsed.get(
-                        "start"
-                    ).union(parsed.get("end"))
+                    ticket_dict[parsed.get("field")] = parsed.get("start").union(
+                        parsed.get("end")
+                    )
                 else:
                     tickets.append(parsed)
     return tickets, ticket_dict

@@ -11,21 +11,26 @@ class Image:
         self._corners = []
 
     def __repr__(self):
-        repr = ""
-        tiles = len(self.tiles)
-        start = 0
-        dimension = int(math.sqrt(tiles))
-        end = dimension - 1
+        tiles_wide = int(math.sqrt(len(self.tiles)))
+        tile_length = 10
+        reprs = ["|" for _ in range(tiles_wide * tile_length)]
 
-        while end < tiles:
-            for row in range(tiles + 1):
-                rows = []
-                for tile in self.tiles[start : end + 1]:
-                    rows.append("".join(tile.image[row]))
-                repr += f"{'|'.join(rows)}\n"
-            start += dimension
-            end += dimension
-            repr += "\n"
+        for i, tile in enumerate(self.tiles):
+            min_row = math.floor(i / tiles_wide) * tile_length
+            for j, row in enumerate(tile.image):
+                reprs[min_row + j] += "".join(row) + "|"
+
+        last_min_row = 0
+        dash_len = tiles_wide * tile_length + tiles_wide - 1
+        repr = "+" + "-" * dash_len + "+\n"
+        for i, row in enumerate(reprs):
+            min_row = math.floor(i / tiles_wide) * tile_length
+            repr += "".join(row) + "\n"
+
+            if min_row != last_min_row:
+                repr += "+" + "-" * dash_len + "+\n"
+            last_min_row = min_row
+        repr += "+" + "-" * dash_len + "+\n"
         return repr
 
     def _read_tiles(self, file):
@@ -221,7 +226,7 @@ print(f"Part 1: {total}")
 
 # part 2
 
-# can i simpy pick 1 corner, rotate it to be the top left corner, and then
+# can i simply pick 1 corner, rotate it to be the top left corner, and then
 # fill it in?
 for tile in image.tiles:
     print(f"tile {tile.id}, neighbors: {len(tile.neighbors)}")

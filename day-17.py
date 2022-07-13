@@ -17,9 +17,7 @@ def list_neighbors(point):
     for p in itertools.product(neighbor_offsets, repeat=len(point)):
         # add pairs together to form new point
         new_point = list(
-            itertools.starmap(
-                lambda x, y: x + y, itertools.zip_longest(p, point)
-            )
+            itertools.starmap(lambda x, y: x + y, itertools.zip_longest(p, point))
         )
         if new_point != point:
             neighbors.append(new_point)
